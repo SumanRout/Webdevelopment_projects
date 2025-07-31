@@ -2,7 +2,7 @@ const express=require('express')
 const mongoose=require('mongoose')
 const cookieParser=require('cookie-parser')
 const cors=require('cors')
-mongoose.connect('mongodb+srv://sumanrout824:vPWjDrmyWqzXx38ht@cluster0.hcdidj4.mongodb.net/'
+mongoose.connect('mongodb+srv://sumanrout824:<password>@cluster0.hcdidj4.mongodb.net/'
 
 ).then(()=>console.log("Mongodb connected")).catch((error)=>console.log(error))
 
