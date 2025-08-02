@@ -1,28 +1,63 @@
 import CommonForm from "@/components/common/form";
+
 import { registerFormControls } from "@/config";
+import { registerUser } from "@/store/auth-slice";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-const initialstate={
-    userName:'',
-    email:'',
-    password:''
-}
-function onSubmit(){
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast,Toaster } from "sonner"
 
-}
-function AuthRegister(){
-    const [formData,setFormData]=useState(initialstate)
-    return (
-        <div className="max-auto w-full max-w-md space-y-6">
-            <div className="text-center">
-                <h1 className="text-3xl font-bold tracking-tight text-foreground">Create new Account</h1>
-                <p>Already have an account <Link className="font-medium text-fuchsia-950 hover:bg-pink-500" to='/auth/login'>Login</Link></p>
-            </div>
-            <CommonForm formControls={registerFormControls} buttonText={"sign up"} formData={formData} setFormData={setFormData} onSubmit={onSubmit} className='bg-blue-700'>
+const initialState = {
+  userName: "",
+  email: "",
+  password: "",
+};
 
-            </CommonForm>
-           
-        </div>
-    )
+function AuthRegister() {
+  const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //const { toast } = Toaster();
+
+  function onSubmit(event) {
+  event.preventDefault();
+  dispatch(registerUser(formData)).then((data) => {
+    if (data?.payload?.success) {
+      toast.success("Registered sucessfully");
+      navigate("/auth/login");
+    } else {
+      toast.error("Registration failed");
+    }
+  });
 }
+
+  console.log(formData);
+
+  return (
+    <div className="mx-auto w-full max-w-md space-y-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+          Create new account
+        </h1>
+        <p className="mt-2">
+          Already have an account
+          <Link
+            className="font-medium ml-2 text-primary hover:underline"
+            to="/auth/login"
+          >
+            Login
+          </Link>
+        </p>
+      </div>
+      <CommonForm 
+        formControls={registerFormControls}
+        buttonText={"Sign Up"}
+        formData={formData}
+        setFormData={setFormData}
+        onSubmit={onSubmit}
+      />
+    </div>
+  );
+}
+
 export default AuthRegister;

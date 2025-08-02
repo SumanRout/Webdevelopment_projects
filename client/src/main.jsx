@@ -2,14 +2,21 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import store from './store/store'
+import { Toaster } from 'sonner'
+import CommonForm from './components/common/form.jsx'
+        
 
 createRoot(document.getElementById('root')).render(
  <BrowserRouter>
- <provider store={store}>
+ <Provider store={store}>
     <App />
-    </provider>
+    <Toaster richColors/>
+    </Provider>
     </BrowserRouter>
  
 )
