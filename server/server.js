@@ -4,7 +4,7 @@ const cookieParser=require('cookie-parser')
 const cors=require('cors')
 
 const authRouter=require("./routes/auth/auth-route")
-mongoose.connect('mongodb+srv://sumanrout824:vPWjDrmyWqzXx38h@cluster0.hcdidj4.mongodb.net/'
+mongoose.connect('mongodb+srv://sumanrout824:<password>@cluster0.hcdidj4.mongodb.net/'
 
 ).then(()=>console.log("Mongodb connected")).catch((error)=>console.log(error))
 
